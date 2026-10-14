@@ -2,7 +2,7 @@
 
 ## 📌 Thông tin sinh viên
 - **Họ và tên:** Lê Trung Đông
-- **Mã sinh viên:** [CẦN BỔ SUNG MÃ SINH VIÊN]
+- **Mã sinh viên:** PTIT-HN-010
 - **Repository:** https://github.com/ptitvn/IT-209-Devops-session13-bktr-daugio.git
 
 ---
