@@ -1,8 +1,75 @@
-# Campus Hub Base
+# Campus Hub - Docker & Docker Compose Triển Khai Hệ Thống
 
-Campus Hub là dự án nền cho Mini Project Session 13. Ứng dụng cung cấp một không gian chung để sinh viên đăng sự kiện, tìm đồ thất lạc, hỏi đáp, trao đổi đồ dùng và tìm nhóm.
+## 📌 Thông tin sinh viên
+- **Họ và tên:** Lê Trung Đông
+- **Mã sinh viên:** [CẦN BỔ SUNG MÃ SINH VIÊN]
+- **Repository:** https://github.com/ptitvn/IT-209-Devops-session13-bktr-daugio.git
 
-Dự án được giữ ở mức nhỏ để dễ đọc và sửa đổi, nhưng đã có đủ luồng giao diện, API, xác thực, migration và kiểm thử.
+---
+
+## 🚀 Hướng dẫn chạy hệ thống
+
+### 1. Kiểm thử backend và đóng gói Docker Image
+Di chuyển vào thư mục `backend`:
+```powershell
+cd backend
+
+# Chạy kiểm thử bằng Gradle
+./gradlew test
+
+# Đóng gói ứng dụng thành file JAR
+./gradlew bootJar
+
+# Build Docker Image cho backend
+docker build -t campus-hub-backend .
+
+# Kiểm tra Docker Image vừa tạo
+docker images campus-hub-backend
+```
+
+### 2. Khởi chạy hệ thống bằng Docker Compose
+Từ thư mục gốc của dự án (`campus-hub-base`):
+```powershell
+# Kiểm tra cấu hình compose
+docker compose config
+
+# Khởi chạy đồng thời Backend và MySQL ở chế độ background
+docker compose up -d
+
+# Kiểm tra trạng thái các container đang chạy
+docker compose ps
+```
+
+### 3. Cổng và URL kiểm tra backend
+- **Cổng công khai backend:** `8080`
+- **URL kiểm tra sức khỏe hệ thống (Health Check):**
+  - URL: `http://localhost:8080/actuator/health`
+  - Lệnh kiểm tra:
+    ```powershell
+    curl http://localhost:8080/actuator/health
+    ```
+  - Kết quả mong đợi: HTTP 200 `{"status":"UP","groups":["liveness","readiness"]}`
+- **URL API kiểm tra dữ liệu bài đăng:** `http://localhost:8080/api/posts`
+
+---
+
+## 📷 Minh chứng hoàn thành bài làm
+
+### 1. Minh chứng 1: Docker Image đã build thành công
+*Lệnh:* `docker images campus-hub-backend`
+![Docker Image](images/1-docker-images.png)
+
+### 2. Minh chứng 2: Trạng thái các service sau khi chạy Compose
+*Lệnh:* `docker compose ps` (Cả 2 container `campus-hub-backend` và `campus-hub-mysql` đều Up và Healthy)
+![Docker Compose PS](images/2-docker-compose-ps.png)
+
+### 3. Minh chứng 3: Kết quả gọi `/actuator/health` trả về HTTP 200 và UP
+*Lệnh:* `curl -i http://localhost:8080/actuator/health`
+![Actuator Health](images/3-actuator-health.png)
+
+---
+
+# Giới thiệu dự án gốc Campus Hub Base
 
 ## Chức năng có sẵn
 

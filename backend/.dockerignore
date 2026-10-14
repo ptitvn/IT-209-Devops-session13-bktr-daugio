@@ -1,0 +1,12 @@
+.gradle/
+.git/
+.gitignore
+.idea/
+*.iml
+.vscode/
+*.log
+build/classes/
+build/generated/
+build/tmp/
+build/reports/
+build/test-results/
